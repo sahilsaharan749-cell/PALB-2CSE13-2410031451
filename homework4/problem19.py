@@ -1,17 +1,23 @@
-def is_subset(a, b):
-    freq = {}
+def has_triplet(arr, target):
+    arr.sort()
+    n = len(arr)
 
-    for num in a:
-        freq[num] = freq.get(num, 0) + 1
+    for i in range(n - 2):
+        left, right = i + 1, n - 1
 
-    for num in b:
-        if freq.get(num, 0) == 0:
-            return False
-        freq[num] -= 1
+        while left < right:
+            s = arr[i] + arr[left] + arr[right]
 
-    return True
+            if s == target:
+                return True
+            elif s < target:
+                left += 1
+            else:
+                right -= 1
+
+    return False
 
 
-print(is_subset([11, 7, 1, 13, 21, 3, 7, 3], [11, 3, 7, 1, 7]))
-print(is_subset([1, 2, 3, 4, 4, 5, 6], [1, 2, 4]))
-print(is_subset([10, 5, 2, 23, 19], [19, 5, 3]))
+print(has_triplet([1, 4, 45, 6, 10, 8], 13))
+print(has_triplet([1, 2, 4, 3, 6, 7], 10))
+print(has_triplet([40, 20, 10, 3, 6, 7], 24))
